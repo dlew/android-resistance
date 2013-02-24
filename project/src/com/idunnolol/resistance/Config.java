@@ -67,6 +67,10 @@ public class Config {
 			// If Percival is in the game, you're going to need Merlin/Assassin
 			mConfig.put(Option.MERLIN_ASSASSIN, true);
 		}
+		else if (option == Option.PERCIVAL && !enabled) {
+			// If Percival is NOT in the game, you don't need Morgana
+			mConfig.put(Option.MORGANA, false);
+		}
 		else if (option == Option.MORGANA && enabled) {
 			// If Morgana is in the game, you will necessarily need Percival and Merlin/Assassin
 			mConfig.put(Option.MERLIN_ASSASSIN, true);
