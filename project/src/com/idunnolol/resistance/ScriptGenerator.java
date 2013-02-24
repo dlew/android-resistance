@@ -61,7 +61,7 @@ public class ScriptGenerator {
 			speak(R.string.script_evil_close_eyes);
 			shortPause();
 
-			if (config.isOptionEnabled(Option.MERLIN_ASSASSIN)) {
+			if (merlinEnabled) {
 				speak(config.isOptionEnabled(Option.MORDRED) ? R.string.script_evil_be_known_except_mordred
 						: R.string.script_evil_be_known);
 				shortPause();
@@ -71,7 +71,7 @@ public class ScriptGenerator {
 				speak(R.string.script_merlin_close_eyes);
 				shortPause();
 
-				if (merlinEnabled) {
+				if (config.isOptionEnabled(Option.PERCIVAL)) {
 					boolean morganaEnabled = config.isOptionEnabled(Option.MORGANA);
 					speak(morganaEnabled ? R.string.script_merlin_morgana_be_known : R.string.script_merlin_be_known);
 					shortPause();
