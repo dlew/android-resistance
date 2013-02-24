@@ -5,23 +5,21 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import android.annotation.SuppressLint;
-import android.app.ListActivity;
-import android.os.Build;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.speech.tts.TextToSpeech.OnInitListener;
 import android.speech.tts.TextToSpeech.OnUtteranceCompletedListener;
 import android.util.SparseBooleanArray;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
+import com.actionbarsherlock.app.SherlockListActivity;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuItem;
 import com.idunnolol.resistance.Config.Option;
 
-public class MainActivity extends ListActivity implements OnInitListener, OnUtteranceCompletedListener {
+public class MainActivity extends SherlockListActivity implements OnInitListener, OnUtteranceCompletedListener {
 
 	private Config mConfig;
 
@@ -109,7 +107,7 @@ public class MainActivity extends ListActivity implements OnInitListener, OnUtte
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.activity_main, menu);
+		getSupportMenuInflater().inflate(R.menu.activity_main, menu);
 		mSpeakMenuItem = menu.findItem(R.id.menu_speak);
 		mShutUpMenuItem = menu.findItem(R.id.menu_shut_up);
 		return true;
@@ -143,13 +141,10 @@ public class MainActivity extends ListActivity implements OnInitListener, OnUtte
 		setIsSpeaking(false);
 	}
 
-	@SuppressLint("NewApi")
 	private void setIsSpeaking(boolean isSpeaking) {
 		mIsSpeaking = isSpeaking;
 
-		if (Build.VERSION.SDK_INT >= 11) {
-			invalidateOptionsMenu();
-		}
+		supportInvalidateOptionsMenu();
 	}
 
 	//////////////////////////////////////////////////////////////////////////
