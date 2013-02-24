@@ -5,8 +5,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import android.annotation.SuppressLint;
 import android.app.ListActivity;
+import android.os.Build;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
+import android.speech.tts.TextToSpeech.OnInitListener;
+import android.speech.tts.TextToSpeech.OnUtteranceCompletedListener;
 import android.util.SparseBooleanArray;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,13 +21,19 @@ import android.widget.SimpleAdapter;
 
 import com.idunnolol.resistance.Config.Option;
 
-public class MainActivity extends ListActivity {
+public class MainActivity extends ListActivity implements OnInitListener, OnUtteranceCompletedListener {
 
 	private Config mConfig;
+
+	private TextToSpeech mTTS;
+
+	private ScriptGenerator mGenerator;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
+		mTTS = new TextToSpeech(this, this);
 
 		mConfig = new Config();
 		mConfig.load(this);
@@ -58,8 +69,19 @@ public class MainActivity extends ListActivity {
 	}
 
 	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+
+		mTTS.shutdown();
+	}
+
+	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		super.onListItemClick(l, v, position, id);
+
+		if (mIsSpeaking) {
+			shutUp();
+		}
 
 		SparseBooleanArray checkedItems = l.getCheckedItemPositions();
 		mConfig.setOptionEnabled(Config.OPTIONS_ORDERED[position], checkedItems.get(position));
@@ -79,19 +101,76 @@ public class MainActivity extends ListActivity {
 	//////////////////////////////////////////////////////////////////////////
 	// Action bar
 
+	private MenuItem mSpeakMenuItem;
+	private MenuItem mShutUpMenuItem;
+
+	// Sometimes starting/stopping is not immediate; use this to determine state
+	private boolean mIsSpeaking = false;
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.activity_main, menu);
+		mSpeakMenuItem = menu.findItem(R.id.menu_speak);
+		mShutUpMenuItem = menu.findItem(R.id.menu_shut_up);
 		return true;
+	}
+
+	@Override
+	public boolean onPrepareOptionsMenu(Menu menu) {
+		mSpeakMenuItem.setVisible(!mIsSpeaking);
+		mShutUpMenuItem.setVisible(mIsSpeaking);
+
+		return super.onPrepareOptionsMenu(menu);
 	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.menu_speak:
+			mGenerator.saySpeech(mConfig);
+			setIsSpeaking(true);
+			return true;
+		case R.id.menu_shut_up:
+			shutUp();
 			return true;
 		}
 
 		return super.onOptionsItemSelected(item);
+	}
+
+	private void shutUp() {
+		mTTS.stop();
+		setIsSpeaking(false);
+	}
+
+	@SuppressLint("NewApi")
+	private void setIsSpeaking(boolean isSpeaking) {
+		mIsSpeaking = isSpeaking;
+
+		if (Build.VERSION.SDK_INT >= 11) {
+			invalidateOptionsMenu();
+		}
+	}
+
+	//////////////////////////////////////////////////////////////////////////
+	// android.speech.tts.TextToSpeech.OnInitListener
+
+	@Override
+	public void onInit(int status) {
+		if (status == TextToSpeech.SUCCESS) {
+			mGenerator = new ScriptGenerator(this, mTTS);
+			mTTS.setOnUtteranceCompletedListener(this);
+		}
+		if (status == TextToSpeech.ERROR) {
+			// TODO: Handle error situation
+		}
+	}
+
+	//////////////////////////////////////////////////////////////////////////
+	// android.speech.tts.TextToSpeech.OnUtteranceCompletedListener
+
+	@Override
+	public void onUtteranceCompleted(String utteranceId) {
+		setIsSpeaking(false);
 	}
 }

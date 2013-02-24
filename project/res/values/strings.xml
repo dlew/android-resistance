@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">The Resistance</string>
+    <string name="app_name">Resistance Script Helper</string>
+
+    <!-- Action bar -->
     <string name="menu_speak">Speak</string>
+    <string name="menu_shut_up">Shut Up</string>
 
     <!-- ListView UI -->
     <string name="option_merlin_assassin">Merlin/Assassin</string>
@@ -17,5 +20,31 @@
     <string name="option_morgana_description">Appears as Merlin</string>
     <string name="option_lancelot_v3">Lancelot (Variant #3)</string>
     <string name="option_lancelot_v3_description">Good and Evil Lancelots know each other</string>
+
+    <!-- Resistance scripts -->
+    <string name="script_close_eyes">Everyone close your eyes.</string>
+    <string name="script_spies_find_each_other">Spies open your eyes.  Spies look around and make sure that you know all the other Spies.</string>
+    <string name="script_spies_close_eyes">Spies close your eyes.</string>
+    <string name="script_open_eyes">Everyone open your eyes.</string>
+
+    <!-- Avalon scripts -->
+    <string name="script_close_eyes_extend_fists">Everyone close your eyes and extend your hand into a fist in front of you.</string>
+    <string name="script_evil_find_each_other">Minions of Mordred, open your eyes and look around so that you know all agents of Evil.</string>
+    <string name="script_evil_find_each_other_except_oberon">Minions of Mordred (except Oberon), open your eyes and look around so that you know all agents of Evil.</string>
+    <string name="script_evil_close_eyes">Minions of Mordred, close your eyes.</string>
+    <string name="script_evil_be_known">Minions of Mordred, extend your thumb so that Merlin will know of you.</string>
+    <string name="script_evil_be_known_except_mordred">Minions of Mordred (except Mordred himself), extend your thumb so that Merlin will know of you.</string>
+    <string name="script_merlin_know_evil">Merlin, open your eyes and see the agents of Evil.</string>
+    <string name="script_evil_hide">Minions of Mordred, put your thumbs down and re-form your hand into a fist.</string>
+    <string name="script_merlin_close_eyes">Merlin, close your eyes.</string>
+    <string name="script_merlin_be_known">Merlin, extend your thumb so that Percival may know of you.</string>
+    <string name="script_merlin_morgana_be_known">Merlin and Morgana, extend your thumb so that Percival may know of you.</string>
+    <string name="script_percival_know_merlin">Percival, open your eyes so that you may know Merlin.</string>
+    <string name="script_percival_know_merlin_morgana">Percival, open your eyes so that you may know Merlin and Morgana.</string>
+    <string name="script_merlin_hide">Merlin, put your thumb down and form your hand into a fist.</string>
+    <string name="script_merlin_morgana_hide">Merlin and Morgana, put your thumbs down and form your hand into a fist.</string>
+    <string name="script_percival_close_eyes">Percival, close your eyes.</string>
+    <string name="script_lancelot_know_each_other">Lancelot, open your eyes to reveal your counterpart.</string>
+    <string name="script_lancelot_close_eyes">Lancelot, close your eyes.</string>
 
 </resources>

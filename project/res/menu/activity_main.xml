@@ -4,5 +4,9 @@
         android:id="@+id/menu_speak"
         android:showAsAction="ifRoom"
         android:title="@string/menu_speak"/>
+    <item
+        android:id="@+id/menu_shut_up"
+        android:showAsAction="ifRoom"
+        android:title="@string/menu_shut_up"/>
 
 </menu>
