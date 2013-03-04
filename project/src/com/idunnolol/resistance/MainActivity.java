@@ -39,19 +39,22 @@ public class MainActivity extends SherlockListActivity implements OnInitListener
 		// Populate a SimpleAdapter with Option data
 		String[] from = {
 			"text1",
-			"text2"
+			"text2",
+			"img1",
 		};
 		int[] to = {
 			android.R.id.text1,
-			android.R.id.text2
+			android.R.id.text2,
+			R.id.character_image_view,
 		};
 
-		List<Map<String, String>> data = new ArrayList<Map<String, String>>();
+		List<Map<String, Object>> data = new ArrayList<Map<String, Object>>();
 
 		for (Option option : Config.OPTIONS_ORDERED) {
-			Map<String, String> row = new HashMap<String, String>();
+			Map<String, Object> row = new HashMap<String, Object>();
 			row.put(from[0], getString(option.getTitleResId()));
 			row.put(from[1], getString(option.getDescResId()));
+			row.put(from[2], option.getImgResId());
 			data.add(row);
 		}
 

@@ -3,12 +3,21 @@
     android:layout_height="match_parent"
     android:minHeight="?android:attr/listPreferredItemHeight" >
 
+    <ImageView
+        android:id="@+id/character_image_view"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="6dip"
+        android:scaleType="fitCenter" />
+
     <TextView
         android:id="@android:id/text1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="6dip"
         android:layout_marginTop="6dip"
+        android:layout_toRightOf="@+id/character_image_view"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView

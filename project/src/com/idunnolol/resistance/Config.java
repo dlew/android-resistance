@@ -13,19 +13,21 @@ import android.preference.PreferenceManager;
 public class Config {
 
 	public enum Option {
-		MERLIN_ASSASSIN(R.string.option_merlin_assassin, R.string.option_merlin_assassin_description),
-		PERCIVAL(R.string.option_percival, R.string.option_percival_description),
-		MORDRED(R.string.option_mordred, R.string.option_mordred_description),
-		OBERON(R.string.option_oberon, R.string.option_oberon_description),
-		MORGANA(R.string.option_morgana, R.string.option_morgana_description),
-		LANCELOT_VARIANT_3(R.string.option_lancelot_v3, R.string.option_lancelot_v3_description);
+		MERLIN_ASSASSIN(R.string.option_merlin_assassin, R.string.option_merlin_assassin_description, R.drawable.role_merlin),
+		PERCIVAL(R.string.option_percival, R.string.option_percival_description, R.drawable.role_percival),
+		MORDRED(R.string.option_mordred, R.string.option_mordred_description, R.drawable.role_mordred),
+		OBERON(R.string.option_oberon, R.string.option_oberon_description, R.drawable.role_oberon),
+		MORGANA(R.string.option_morgana, R.string.option_morgana_description, R.drawable.role_morgana),
+		LANCELOT_VARIANT_3(R.string.option_lancelot_v3, R.string.option_lancelot_v3_description, R.drawable.role_lancelot_evil);
 
 		private int mTitleResId;
 		private int mDescResId;
+		private int mImgResId;
 
-		private Option(int titleResId, int descResId) {
+		private Option(int titleResId, int descResId, int imgResId) {
 			mTitleResId = titleResId;
 			mDescResId = descResId;
+			mImgResId = imgResId;
 		}
 
 		public int getTitleResId() {
@@ -34,6 +36,10 @@ public class Config {
 
 		public int getDescResId() {
 			return mDescResId;
+		}
+
+		public int getImgResId() {
+			return mImgResId;
 		}
 	}
 
